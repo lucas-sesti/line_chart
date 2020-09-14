@@ -1,3 +1,7 @@
+## [1.0.3] - Line chart
+
+* Added showcase image in readme.md
+
 ## [1.0.2] - Line chart
 
 * Removed show legends options
