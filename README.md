@@ -1,6 +1,6 @@
 # Line Chart
 
-[![pub package](https://img.shields.io/pub/v/line_chart.svg?style=for-the-badge&color=blue)](https://pub.dartlang.org/packages/menu_button)
+[![pub package](https://img.shields.io/pub/v/line_chart.svg?style=for-the-badge&color=blue)](https://pub.dartlang.org/packages/line_chart)
 
 A simple flutter package to create a custom line chart
 
@@ -8,7 +8,7 @@ A simple flutter package to create a custom line chart
 
 ## Installations
 
-Add `line_chart: ^1.0.4` in your `pubspec.yaml` dependencies. And import it:
+Add `line_chart: ^1.0.5` in your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:line_chart/charts/line-chart.widget.dart';

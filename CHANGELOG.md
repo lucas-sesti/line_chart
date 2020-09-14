@@ -1,19 +1,23 @@
+## [1.0.5] - Line chart
+
+- Fixed name of line chart model file and link of README.md
+
 ## [1.0.4] - Line chart
 
-* Fix bug when have many items and draw the last line
+- Fix bug when have many items and draw the last line
 
 ## [1.0.3] - Line chart
 
-* Added showcase image in readme.md
+- Added showcase image in readme.md
 
 ## [1.0.2] - Line chart
 
-* Removed show legends options
+- Removed show legends options
 
 ## [1.0.1] - Line chart
 
-* Fix name of data model
+- Fix name of data model
 
 ## [1.0.0] - Line chart
 
-* A simple line chart with full customization
+- A simple line chart with full customization
