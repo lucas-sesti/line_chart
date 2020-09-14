@@ -1,3 +1,7 @@
+## [1.0.4] - Line chart
+
+* Fix bug when have many items and draw the last line
+
 ## [1.0.3] - Line chart
 
 * Added showcase image in readme.md
