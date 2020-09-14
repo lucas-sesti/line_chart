@@ -1,3 +1,7 @@
 ## [1.0.1] - Line chart
 
+* Fix name of data model
+
+## [1.0.0] - Line chart
+
 * A simple line chart with full customization
