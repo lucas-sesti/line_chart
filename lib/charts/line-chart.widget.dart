@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:line_chart/charts/time-series-chart-painter.widget.dart';
+import 'package:line_chart/charts/line-chart-painter.widget.dart';
 import 'package:line_chart/model/month-bar-chart.model.dart';
 
 class LineChart extends StatefulWidget {
