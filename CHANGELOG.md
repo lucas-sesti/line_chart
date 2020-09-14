@@ -1,5 +1,9 @@
 ## [1.0.1] - Line chart
 
+* Removed show legends options
+
+## [1.0.1] - Line chart
+
 * Fix name of data model
 
 ## [1.0.0] - Line chart
