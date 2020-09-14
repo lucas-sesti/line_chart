@@ -36,9 +36,7 @@ class LineChartPainter extends CustomPainter {
 
       path.moveTo(value[0].dx, value[0].dy);
 
-      if (data.last == value) {
-        path.lineTo(size.width, value[0].dy);
-      } else {
+      if (data.last != value) {
         path.lineTo(data[currentIndex + 1][0].dx, data[currentIndex + 1][0].dy);
       }
 
