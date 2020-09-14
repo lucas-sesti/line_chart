@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TimeSeriesChartPainter extends CustomPainter {
+class LineChartPainter extends CustomPainter {
   final List<List> data;
   final double width;
   final double height;
@@ -11,7 +11,7 @@ class TimeSeriesChartPainter extends CustomPainter {
   final double radiusValue;
   final Paint insideCirclePaint;
 
-  TimeSeriesChartPainter(
+  LineChartPainter(
     this.data,
     this.width,
     this.height,

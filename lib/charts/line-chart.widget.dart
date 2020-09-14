@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:line_chart/charts/time-series-chart-painter.widget.dart';
 import 'package:line_chart/model/month-bar-chart.model.dart';
 
-class TimeSeriesChart extends StatefulWidget {
-  const TimeSeriesChart({
+class LineChart extends StatefulWidget {
+  const LineChart({
     @required this.width,
     @required this.height,
     @required this.data,
@@ -38,10 +38,10 @@ class TimeSeriesChart extends StatefulWidget {
   final BoxDecoration linePointerDecoration;
 
   @override
-  _TimeSeriesChartState createState() => _TimeSeriesChartState();
+  _LineChartState createState() => _LineChartState();
 }
 
-class _TimeSeriesChartState extends State<TimeSeriesChart> {
+class _LineChartState extends State<LineChart> {
   final double radiusValue = 6;
   BoxDecoration linePointerDecoration = BoxDecoration(
     color: Colors.black,
@@ -226,7 +226,7 @@ class _TimeSeriesChartState extends State<TimeSeriesChart> {
               onPanEnd: _dropPointer,
               child: CustomPaint(
                 size: Size(widget.width, widget.height),
-                painter: TimeSeriesChartPainter(offsetsAndValues, widget.width,
+                painter: LineChartPainter(offsetsAndValues, widget.width,
                     widget.height, widget.linePaint, widget.circlePaint,
                     customDraw: widget.customDraw,
                     insideCirclePaint: widget.insideCirclePaint,

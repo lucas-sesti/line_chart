@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:line_chart/charts/time-series-chart.widget.dart';
+import 'package:line_chart/charts/line-chart.widget.dart';
 import 'package:line_chart/model/month-bar-chart.model.dart';
-import 'dart:ui' as ui;
 
 void main() {
   runApp(MyApp());
@@ -116,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Line chart - Line, Circles, Pointer',
                   style: Theme.of(context).textTheme.headline5,
                 ),
-                TimeSeriesChart(
+                LineChart(
                   width: MediaQuery.of(context).size.width,
                   height: 180,
                   data: data,
@@ -155,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Line chart - Line, Pointer',
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  TimeSeriesChart(
+                  LineChart(
                     width: MediaQuery.of(context).size.width,
                     height: 180,
                     data: data,
@@ -191,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Line chart - Line',
                   style: Theme.of(context).textTheme.headline5,
                 ),
-                TimeSeriesChart(
+                LineChart(
                   width: MediaQuery.of(context).size.width,
                   height: 180,
                   data: data,
