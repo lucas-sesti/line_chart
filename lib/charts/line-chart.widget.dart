@@ -9,7 +9,6 @@ class LineChart extends StatefulWidget {
     @required this.data,
     @required this.linePaint,
     this.circlePaint,
-    this.showLegend = false,
     this.showPointer = false,
     this.onValuePointer,
     this.onDropPointer,
@@ -21,21 +20,20 @@ class LineChart extends StatefulWidget {
     this.pointerDecoration,
   });
 
+  final Function(LineChartModel) onValuePointer;
+  final Function(Canvas, Size) customDraw;
+  final Function onDropPointer;
+  final BoxDecoration pointerDecoration;
+  final BoxDecoration linePointerDecoration;
   final double width;
   final double height;
-  final List<LineChartModel> data;
-  final Paint linePaint;
-  final bool showPointer;
-  final Paint circlePaint;
-  final BoxDecoration pointerDecoration;
-  final bool showLegend;
-  final Function(LineChartModel) onValuePointer;
-  final Function onDropPointer;
-  final Function(Canvas, Size) customDraw;
-  final Paint insideCirclePaint;
   final double circleRadiusValue;
+  final bool showPointer;
   final bool showCircles;
-  final BoxDecoration linePointerDecoration;
+  final Paint linePaint;
+  final Paint circlePaint;
+  final Paint insideCirclePaint;
+  final List<LineChartModel> data;
 
   @override
   _LineChartState createState() => _LineChartState();
@@ -43,7 +41,8 @@ class LineChart extends StatefulWidget {
 
 class _LineChartState extends State<LineChart> {
   final double radiusValue = 6;
-  Paint circlePaint = Paint()..color = Colors.black;
+
+  List<List> offsetsAndValues = [];
   BoxDecoration linePointerDecoration = BoxDecoration(
     color: Colors.black,
   );
@@ -53,11 +52,10 @@ class _LineChartState extends State<LineChart> {
   );
   double x = 0;
   double y = 0;
-  bool showPointer = false;
-  List<List> offsetsAndValues = [];
-
   double maxValue = 0;
   double minValue = 0;
+  bool showPointer = false;
+  Paint circlePaint = Paint()..color = Colors.black;
 
   void initState() {
     super.initState();
@@ -273,21 +271,21 @@ class _LineChartState extends State<LineChart> {
               ),
             ),
           },
-          if (widget.showLegend) ...{
-            Padding(
-              padding: EdgeInsets.only(top: 6),
-              child: Row(
-                children: widget.data.map<Widget>((chart) {
-                  return Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 6),
-                      child: Text('item'),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          }
+          // if (widget.showLegend) ...{
+          //   Padding(
+          //     padding: EdgeInsets.only(top: 6),
+          //     child: Row(
+          //       children: widget.data.map<Widget>((chart) {
+          //         return Expanded(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: 6),
+          //             child: Text('item'),
+          //           ),
+          //         );
+          //       }).toList(),
+          //     ),
+          //   ),
+          // }
         ],
       ),
     );
