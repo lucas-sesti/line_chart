@@ -52,19 +52,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<MonthChartModel> data = [
-    MonthChartModel(amount: 100, date: DateTime(2020, 1, 1)),
-    MonthChartModel(amount: 200, date: DateTime(2020, 1, 2)),
-    MonthChartModel(amount: 300, date: DateTime(2020, 1, 3)),
-    MonthChartModel(amount: 500, date: DateTime(2020, 1, 4)),
-    MonthChartModel(amount: 800, date: DateTime(2020, 1, 5)),
-    MonthChartModel(amount: 200, date: DateTime(2020, 1, 6)),
-    MonthChartModel(amount: 120, date: DateTime(2020, 1, 7)),
-    MonthChartModel(amount: 140, date: DateTime(2020, 1, 8)),
-    MonthChartModel(amount: 110, date: DateTime(2020, 1, 9)),
-    MonthChartModel(amount: 250, date: DateTime(2020, 1, 10)),
-    MonthChartModel(amount: 390, date: DateTime(2020, 1, 11)),
-    MonthChartModel(amount: 1300, date: DateTime(2020, 1, 12)),
+  List<LineChartModel> data = [
+    LineChartModel(amount: 100, date: DateTime(2020, 1, 1)),
+    LineChartModel(amount: 200, date: DateTime(2020, 1, 2)),
+    LineChartModel(amount: 300, date: DateTime(2020, 1, 3)),
+    LineChartModel(amount: 500, date: DateTime(2020, 1, 4)),
+    LineChartModel(amount: 800, date: DateTime(2020, 1, 5)),
+    LineChartModel(amount: 200, date: DateTime(2020, 1, 6)),
+    LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
+    LineChartModel(amount: 140, date: DateTime(2020, 1, 8)),
+    LineChartModel(amount: 110, date: DateTime(2020, 1, 9)),
+    LineChartModel(amount: 250, date: DateTime(2020, 1, 10)),
+    LineChartModel(amount: 390, date: DateTime(2020, 1, 11)),
+    LineChartModel(amount: 1300, date: DateTime(2020, 1, 12)),
   ];
 
   int _counter = 0;
@@ -72,18 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       data = [
-        MonthChartModel(amount: 500, date: DateTime(2020, 1, 4)),
-        MonthChartModel(amount: 200, date: DateTime(2020, 1, 2)),
-        MonthChartModel(amount: 200, date: DateTime(2020, 1, 6)),
-        MonthChartModel(amount: 800, date: DateTime(2020, 1, 5)),
-        MonthChartModel(amount: 1300, date: DateTime(2020, 1, 12)),
-        MonthChartModel(amount: 300, date: DateTime(2020, 1, 3)),
-        MonthChartModel(amount: 120, date: DateTime(2020, 1, 7)),
-        MonthChartModel(amount: 250, date: DateTime(2020, 1, 10)),
-        MonthChartModel(amount: 140, date: DateTime(2020, 1, 8)),
-        MonthChartModel(amount: 100, date: DateTime(2020, 1, 1)),
-        MonthChartModel(amount: 110, date: DateTime(2020, 1, 9)),
-        MonthChartModel(amount: 390, date: DateTime(2020, 1, 11)),
+        LineChartModel(amount: 500, date: DateTime(2020, 1, 4)),
+        LineChartModel(amount: 200, date: DateTime(2020, 1, 2)),
+        LineChartModel(amount: 200, date: DateTime(2020, 1, 6)),
+        LineChartModel(amount: 800, date: DateTime(2020, 1, 5)),
+        LineChartModel(amount: 1300, date: DateTime(2020, 1, 12)),
+        LineChartModel(amount: 300, date: DateTime(2020, 1, 3)),
+        LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
+        LineChartModel(amount: 250, date: DateTime(2020, 1, 10)),
+        LineChartModel(amount: 140, date: DateTime(2020, 1, 8)),
+        LineChartModel(amount: 100, date: DateTime(2020, 1, 1)),
+        LineChartModel(amount: 110, date: DateTime(2020, 1, 9)),
+        LineChartModel(amount: 390, date: DateTime(2020, 1, 11)),
       ];
     });
   }
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.black,
                   ),
                   insideCirclePaint: insideCirclePaint,
-                  onValuePointer: (MonthChartModel value) {
+                  onValuePointer: (LineChartModel value) {
                     print('onValuePointer');
                   },
                   onDropPointer: () {
@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.black,
                     ),
                     insideCirclePaint: insideCirclePaint,
-                    onValuePointer: (MonthChartModel value) {
+                    onValuePointer: (LineChartModel value) {
                       print('onValuePointer');
                     },
                     onDropPointer: () {
@@ -207,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.black,
                   ),
                   insideCirclePaint: insideCirclePaint,
-                  onValuePointer: (MonthChartModel value) {
+                  onValuePointer: (LineChartModel value) {
                     print('onValuePointer');
                   },
                   onDropPointer: () {

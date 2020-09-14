@@ -1,8 +1,8 @@
-class MonthChartModel {
+class LineChartModel {
   DateTime date;
   double amount;
 
-  MonthChartModel({
+  LineChartModel({
     this.date,
     this.amount,
   });

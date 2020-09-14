@@ -52,7 +52,7 @@ LineChart(
     color: Colors.black,
   ) // Your decoration of circle pointer,
   insideCirclePaint: Paint()..color = Colors.white // On your circle of the chart, have a second circle, which is inside and a slightly smaller size.
-  onValuePointer: (MonthChartModel value) {
+  onValuePointer: (LineChartModel value) {
     print('onValuePointer');
   } // This callback is called when change the pointer,
   onDropPointer: () {

@@ -23,13 +23,13 @@ class LineChart extends StatefulWidget {
 
   final double width;
   final double height;
-  final List<MonthChartModel> data;
+  final List<LineChartModel> data;
   final Paint linePaint;
   final bool showPointer;
   final Paint circlePaint;
   final BoxDecoration pointerDecoration;
   final bool showLegend;
-  final Function(MonthChartModel) onValuePointer;
+  final Function(LineChartModel) onValuePointer;
   final Function onDropPointer;
   final Function(Canvas, Size) customDraw;
   final Paint insideCirclePaint;
