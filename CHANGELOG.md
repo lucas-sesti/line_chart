@@ -1,4 +1,4 @@
-## [1.0.1] - Line chart
+## [1.0.2] - Line chart
 
 * Removed show legends options
 
