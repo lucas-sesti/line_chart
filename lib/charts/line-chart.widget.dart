@@ -8,7 +8,7 @@ class LineChart extends StatefulWidget {
     @required this.height,
     @required this.data,
     @required this.linePaint,
-    @required this.circlePaint,
+    this.circlePaint,
     this.showLegend = false,
     this.showPointer = false,
     this.onValuePointer,
@@ -43,6 +43,7 @@ class LineChart extends StatefulWidget {
 
 class _LineChartState extends State<LineChart> {
   final double radiusValue = 6;
+  Paint circlePaint = Paint()..color = Colors.black;
   BoxDecoration linePointerDecoration = BoxDecoration(
     color: Colors.black,
   );
@@ -70,6 +71,10 @@ class _LineChartState extends State<LineChart> {
 
     if (widget.pointerDecoration != null) {
       pointerDecoration = widget.pointerDecoration;
+    }
+
+    if (widget.circlePaint != null) {
+      circlePaint = widget.circlePaint;
     }
   }
 
