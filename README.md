@@ -4,9 +4,11 @@
 
 A simple flutter package to create a custom line chart
 
+![LineChart](https://raw.githubusercontent.com/lucas-sesti/line_chart/master/example/Showcase.jpeg)
+
 ## Installations
 
-Add `line_chart: ^1.0.2` in your `pubspec.yaml` dependencies. And import it:
+Add `line_chart: ^1.0.0` in your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:line_chart/charts/line-chart.widget.dart';
@@ -52,7 +54,7 @@ LineChart(
     color: Colors.black,
   ) // Your decoration of circle pointer,
   insideCirclePaint: Paint()..color = Colors.white // On your circle of the chart, have a second circle, which is inside and a slightly smaller size.
-  onValuePointer: (LineChartModel value) {
+  onValuePointer: (MonthChartModel value) {
     print('onValuePointer');
   } // This callback is called when change the pointer,
   onDropPointer: () {
