@@ -7,3 +7,13 @@ class LineChartModel {
     this.amount,
   });
 }
+
+class LineChartModelCallback {
+  LineChartModel chart;
+  double percentage;
+
+  LineChartModelCallback({
+    this.chart,
+    this.percentage,
+  });
+}

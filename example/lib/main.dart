@@ -53,7 +53,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<LineChartModel> data = [
-    LineChartModel(amount: 100, date: DateTime(2020, 1, 1)),
+    LineChartModel(amount: 300, date: DateTime(2020, 1, 1)),
     LineChartModel(amount: 200, date: DateTime(2020, 1, 2)),
     LineChartModel(amount: 300, date: DateTime(2020, 1, 3)),
     LineChartModel(amount: 500, date: DateTime(2020, 1, 4)),
@@ -103,19 +103,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Line Chart Showcase'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(24),
-        child: ListView(
-          children: [
-            // First chart
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Line chart - Line, Circles, Pointer',
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                LineChart(
+      body: ListView(
+        children: [
+          // First chart
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Line chart - Line, Circles, Pointer',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              Container(
+                color: Colors.red,
+                child: LineChart(
                   width: MediaQuery.of(context).size.width,
                   height: 180,
                   data: data,
@@ -132,62 +132,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.black,
                   ),
                   insideCirclePaint: insideCirclePaint,
-                  onValuePointer: (LineChartModel value) {
-                    print('onValuePointer');
+                  onValuePointer: (LineChartModelCallback value) {
+                    print('${value.chart} ${value.percentage}');
                   },
                   onDropPointer: () {
                     print('onDropPointer');
                   },
+                  insidePadding: 16,
                 ),
-              ],
-            ),
-
-            // Second Chart
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 24,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Line chart - Line, Pointer',
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                  LineChart(
-                    width: MediaQuery.of(context).size.width,
-                    height: 180,
-                    data: data,
-                    linePaint: linePaint,
-                    circlePaint: circlePaint,
-                    showPointer: true,
-                    showCircles: false,
-                    customDraw: (Canvas canvas, Size size) {},
-                    linePointerDecoration: BoxDecoration(
-                      color: Colors.black,
-                    ),
-                    pointerDecoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    insideCirclePaint: insideCirclePaint,
-                    onValuePointer: (LineChartModel value) {
-                      print('onValuePointer');
-                    },
-                    onDropPointer: () {
-                      print('onDropPointer');
-                    },
-                  ),
-                ],
-              ),
-            ),
+            ],
+          ),
 
-            // Third chart
-            Column(
+          // Second Chart
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 24,
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Line chart - Line',
+                  'Line chart - Line, Pointer',
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 LineChart(
@@ -196,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   data: data,
                   linePaint: linePaint,
                   circlePaint: circlePaint,
-                  showPointer: false,
+                  showPointer: true,
                   showCircles: false,
                   customDraw: (Canvas canvas, Size size) {},
                   linePointerDecoration: BoxDecoration(
@@ -207,8 +173,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.black,
                   ),
                   insideCirclePaint: insideCirclePaint,
-                  onValuePointer: (LineChartModel value) {
-                    print('onValuePointer');
+                  onValuePointer: (LineChartModelCallback value) {
+                    print('${value.chart} ${value.percentage}');
                   },
                   onDropPointer: () {
                     print('onDropPointer');
@@ -216,8 +182,43 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+
+          // Third chart
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Line chart - Line',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              LineChart(
+                width: MediaQuery.of(context).size.width,
+                height: 180,
+                data: data,
+                linePaint: linePaint,
+                circlePaint: circlePaint,
+                showPointer: false,
+                showCircles: false,
+                customDraw: (Canvas canvas, Size size) {},
+                linePointerDecoration: BoxDecoration(
+                  color: Colors.black,
+                ),
+                pointerDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                ),
+                insideCirclePaint: insideCirclePaint,
+                onValuePointer: (LineChartModelCallback value) {
+                  print('${value.chart} ${value.percentage}');
+                },
+                onDropPointer: () {
+                  print('onDropPointer');
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

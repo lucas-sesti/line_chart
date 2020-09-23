@@ -10,6 +10,7 @@ class LineChartPainter extends CustomPainter {
   final bool showCircles;
   final double radiusValue;
   final Paint insideCirclePaint;
+  final double insidePadding;
 
   LineChartPainter(
     this.data,
@@ -21,6 +22,7 @@ class LineChartPainter extends CustomPainter {
     this.showCircles = true,
     this.radiusValue = 6,
     this.insideCirclePaint,
+    @required this.insidePadding,
   });
 
   @override
@@ -34,18 +36,20 @@ class LineChartPainter extends CustomPainter {
 
       Path path = Path();
 
-      path.moveTo(value[0].dx, value[0].dy);
+      path.moveTo(value[0].dx + insidePadding, value[0].dy);
 
       if (data.last != value) {
-        path.lineTo(data[currentIndex + 1][0].dx, data[currentIndex + 1][0].dy);
+        path.lineTo(data[currentIndex + 1][0].dx + insidePadding + 1,
+            data[currentIndex + 1][0].dy);
       }
 
       canvas.drawPath(path, linePaint);
 
       if (showCircles) {
-        canvas.drawCircle(value[0], radiusValue, circlePaint);
+        canvas.drawCircle(Offset(value[0].dx + insidePadding, value[0].dy),
+            radiusValue, circlePaint);
         canvas.drawCircle(
-          value[0],
+          Offset(value[0].dx + insidePadding, value[0].dy),
           radiusValue - radiusValue / 2,
           insideCirclePaint != null ? insideCirclePaint : circlePaint,
         );

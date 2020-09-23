@@ -18,9 +18,10 @@ class LineChart extends StatefulWidget {
     this.showCircles = false,
     this.linePointerDecoration,
     this.pointerDecoration,
+    this.insidePadding = 8,
   });
 
-  final Function(LineChartModel) onValuePointer;
+  final Function(LineChartModelCallback) onValuePointer;
   final Function(Canvas, Size) customDraw;
   final Function onDropPointer;
   final BoxDecoration pointerDecoration;
@@ -34,14 +35,13 @@ class LineChart extends StatefulWidget {
   final Paint circlePaint;
   final Paint insideCirclePaint;
   final List<LineChartModel> data;
+  final double insidePadding;
 
   @override
   _LineChartState createState() => _LineChartState();
 }
 
 class _LineChartState extends State<LineChart> {
-  final double radiusValue = 6;
-
   List<List> offsetsAndValues = [];
   BoxDecoration linePointerDecoration = BoxDecoration(
     color: Colors.black,
@@ -56,6 +56,7 @@ class _LineChartState extends State<LineChart> {
   double minValue = 0;
   bool showPointer = false;
   Paint circlePaint = Paint()..color = Colors.black;
+  List<double> percentagesOffsets = [];
 
   void initState() {
     super.initState();
@@ -99,7 +100,8 @@ class _LineChartState extends State<LineChart> {
     double next = 0;
 
     offsetsAndValues = widget.data.map((chart) {
-      final Offset circlePosition = _getPointPos(next + 12, chart.amount);
+      final Offset circlePosition =
+          _getPointPos(next + widget.circleRadiusValue, chart.amount);
 
       next = next + basePos;
       return [
@@ -140,8 +142,10 @@ class _LineChartState extends State<LineChart> {
       percentage = 0.5;
     }
 
+    percentagesOffsets.add(percentage);
+
     return Offset(
-      width - radiusValue * 2,
+      width - widget.circleRadiusValue * 2,
       widget.height * (1 - percentage),
     );
   }
@@ -190,7 +194,12 @@ class _LineChartState extends State<LineChart> {
           showPointer = false;
         } else {
           if (widget.onValuePointer != null) {
-            widget.onValuePointer(offsetsAndValues[nearestIndex][1]);
+            widget.onValuePointer(
+              LineChartModelCallback(
+                chart: offsetsAndValues[nearestIndex][1],
+                percentage: percentagesOffsets[nearestIndex] * 100,
+              ),
+            );
           }
 
           showPointer = true;
@@ -211,82 +220,89 @@ class _LineChartState extends State<LineChart> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.width,
-      height: widget.height + 16,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            child: GestureDetector(
+    return Container(
+      color: Colors.blue,
+      child: SizedBox(
+        width: widget.width,
+        height: widget.height + widget.insidePadding,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            GestureDetector(
               onLongPressStart: _showDetailsPointer,
               onLongPressMoveUpdate: _showDetailsPointer,
               onLongPressEnd: _dropPointer,
               onPanUpdate: _showDetailsPointer,
               onPanEnd: _dropPointer,
-              child: CustomPaint(
-                size: Size(widget.width, widget.height),
-                painter: LineChartPainter(offsetsAndValues, widget.width,
-                    widget.height, widget.linePaint, widget.circlePaint,
+              child: Container(
+                color: Colors.green,
+                child: CustomPaint(
+                  size: Size(widget.width, widget.height),
+                  painter: LineChartPainter(
+                    offsetsAndValues,
+                    widget.width,
+                    widget.height,
+                    widget.linePaint,
+                    widget.circlePaint,
                     customDraw: widget.customDraw,
                     insideCirclePaint: widget.insideCirclePaint,
                     radiusValue: widget.circleRadiusValue,
-                    showCircles: widget.showCircles),
-              ),
-            ),
-          ),
-          if (widget.showPointer) ...{
-            // Line
-            Positioned(
-              left: x + 14.5,
-              top: 0,
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: showPointer ? 1 : 0,
-                curve: Curves.easeInOut,
-                child: Container(
-                  height: widget.height + 16,
-                  width: 2,
-                  decoration: linePointerDecoration,
+                    showCircles: widget.showCircles,
+                    insidePadding: widget.insidePadding,
+                  ),
                 ),
               ),
             ),
+            if (widget.showPointer) ...{
+              // Line
+              Positioned(
+                left: x + widget.insidePadding - 1.5,
+                top: 0,
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 200),
+                  opacity: showPointer ? 1 : 0,
+                  curve: Curves.easeInOut,
+                  child: Container(
+                    height: widget.height + widget.insidePadding,
+                    width: 2,
+                    decoration: linePointerDecoration,
+                  ),
+                ),
+              ),
 
-            // Circle
-            Positioned(
-              left: x + 9,
-              top: y + 2,
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: showPointer ? 1 : 0,
-                curve: Curves.easeInOut,
-                child: Container(
-                  width: 12,
-                  height: 12,
-                  decoration: pointerDecoration,
+              // Circle
+              Positioned(
+                left: x + widget.insidePadding - 6.5,
+                top: (y - 6) + widget.insidePadding / 2,
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 200),
+                  opacity: showPointer ? 1 : 0,
+                  curve: Curves.easeInOut,
+                  child: Container(
+                    width: widget.circleRadiusValue * 2,
+                    height: widget.circleRadiusValue * 2,
+                    decoration: pointerDecoration,
+                  ),
                 ),
               ),
-            ),
-          },
-          // if (widget.showLegend) ...{
-          //   Padding(
-          //     padding: EdgeInsets.only(top: 6),
-          //     child: Row(
-          //       children: widget.data.map<Widget>((chart) {
-          //         return Expanded(
-          //           child: Padding(
-          //             padding: EdgeInsets.only(top: 6),
-          //             child: Text('item'),
-          //           ),
-          //         );
-          //       }).toList(),
-          //     ),
-          //   ),
-          // }
-        ],
+            },
+            // if (widget.showLegend) ...{
+            //   Padding(
+            //     padding: EdgeInsets.only(top: 6),
+            //     child: Row(
+            //       children: widget.data.map<Widget>((chart) {
+            //         return Expanded(
+            //           child: Padding(
+            //             padding: EdgeInsets.only(top: 6),
+            //             child: Text('item'),
+            //           ),
+            //         );
+            //       }).toList(),
+            //     ),
+            //   ),
+            // }
+          ],
+        ),
       ),
     );
   }
