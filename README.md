@@ -8,7 +8,7 @@ A simple flutter package to create a custom line chart
 
 ## Installations
 
-Add `line_chart: ^1.0.5` in your `pubspec.yaml` dependencies. And import it:
+Add `line_chart: ^1.0.6` in your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:line_chart/charts/line-chart.widget.dart';

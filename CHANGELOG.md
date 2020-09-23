@@ -1,3 +1,8 @@
+## [1.0.6] - Line chart
+
+- Created new model LineChartModelCallback when change pointer
+- Now in callback of pointer, returns the percentage of amount in canvas height size
+
 ## [1.0.5] - Line chart
 
 - Fixed name of line chart model file and link of README.md
