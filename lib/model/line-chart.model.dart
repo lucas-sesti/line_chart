@@ -1,3 +1,5 @@
+library line_chart;
+
 class LineChartModel {
   DateTime date;
   double amount;

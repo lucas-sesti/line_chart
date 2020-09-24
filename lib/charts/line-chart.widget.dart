@@ -1,3 +1,5 @@
+library line_chart;
+
 import 'package:flutter/material.dart';
 import 'package:line_chart/charts/line-chart-painter.widget.dart';
 import 'package:line_chart/model/line-chart.model.dart';
@@ -220,89 +222,83 @@ class _LineChartState extends State<LineChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: SizedBox(
-        width: widget.width,
-        height: widget.height + widget.insidePadding,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            GestureDetector(
-              onLongPressStart: _showDetailsPointer,
-              onLongPressMoveUpdate: _showDetailsPointer,
-              onLongPressEnd: _dropPointer,
-              onPanUpdate: _showDetailsPointer,
-              onPanEnd: _dropPointer,
-              child: Container(
-                color: Colors.green,
-                child: CustomPaint(
-                  size: Size(widget.width, widget.height),
-                  painter: LineChartPainter(
-                    offsetsAndValues,
-                    widget.width,
-                    widget.height,
-                    widget.linePaint,
-                    widget.circlePaint,
-                    customDraw: widget.customDraw,
-                    insideCirclePaint: widget.insideCirclePaint,
-                    radiusValue: widget.circleRadiusValue,
-                    showCircles: widget.showCircles,
-                    insidePadding: widget.insidePadding,
-                  ),
+    return SizedBox(
+      width: widget.width,
+      height: widget.height + widget.insidePadding,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          GestureDetector(
+            onLongPressStart: _showDetailsPointer,
+            onLongPressMoveUpdate: _showDetailsPointer,
+            onLongPressEnd: _dropPointer,
+            onPanUpdate: _showDetailsPointer,
+            onPanEnd: _dropPointer,
+            child: CustomPaint(
+              size: Size(widget.width, widget.height),
+              painter: LineChartPainter(
+                offsetsAndValues,
+                widget.width,
+                widget.height,
+                widget.linePaint,
+                widget.circlePaint,
+                customDraw: widget.customDraw,
+                insideCirclePaint: widget.insideCirclePaint,
+                radiusValue: widget.circleRadiusValue,
+                showCircles: widget.showCircles,
+                insidePadding: widget.insidePadding,
+              ),
+            ),
+          ),
+          if (widget.showPointer) ...{
+            // Line
+            Positioned(
+              left: x + widget.insidePadding - 1.5,
+              top: 0,
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 200),
+                opacity: showPointer ? 1 : 0,
+                curve: Curves.easeInOut,
+                child: Container(
+                  height: widget.height + widget.insidePadding,
+                  width: 2,
+                  decoration: linePointerDecoration,
                 ),
               ),
             ),
-            if (widget.showPointer) ...{
-              // Line
-              Positioned(
-                left: x + widget.insidePadding - 1.5,
-                top: 0,
-                child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 200),
-                  opacity: showPointer ? 1 : 0,
-                  curve: Curves.easeInOut,
-                  child: Container(
-                    height: widget.height + widget.insidePadding,
-                    width: 2,
-                    decoration: linePointerDecoration,
-                  ),
-                ),
-              ),
 
-              // Circle
-              Positioned(
-                left: x + widget.insidePadding - 6.5,
-                top: (y - 6) + widget.insidePadding / 2,
-                child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 200),
-                  opacity: showPointer ? 1 : 0,
-                  curve: Curves.easeInOut,
-                  child: Container(
-                    width: widget.circleRadiusValue * 2,
-                    height: widget.circleRadiusValue * 2,
-                    decoration: pointerDecoration,
-                  ),
+            // Circle
+            Positioned(
+              left: x + widget.insidePadding - 6.5,
+              top: (y - 6) + widget.insidePadding / 2,
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 200),
+                opacity: showPointer ? 1 : 0,
+                curve: Curves.easeInOut,
+                child: Container(
+                  width: widget.circleRadiusValue * 2,
+                  height: widget.circleRadiusValue * 2,
+                  decoration: pointerDecoration,
                 ),
               ),
-            },
-            // if (widget.showLegend) ...{
-            //   Padding(
-            //     padding: EdgeInsets.only(top: 6),
-            //     child: Row(
-            //       children: widget.data.map<Widget>((chart) {
-            //         return Expanded(
-            //           child: Padding(
-            //             padding: EdgeInsets.only(top: 6),
-            //             child: Text('item'),
-            //           ),
-            //         );
-            //       }).toList(),
-            //     ),
-            //   ),
-            // }
-          ],
-        ),
+            ),
+          },
+          // if (widget.showLegend) ...{
+          //   Padding(
+          //     padding: EdgeInsets.only(top: 6),
+          //     child: Row(
+          //       children: widget.data.map<Widget>((chart) {
+          //         return Expanded(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: 6),
+          //             child: Text('item'),
+          //           ),
+          //         );
+          //       }).toList(),
+          //     ),
+          //   ),
+          // }
+        ],
       ),
     );
   }

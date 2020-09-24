@@ -1,3 +1,7 @@
+## [1.0.7] - Line chart
+
+- Removed containers in painter
+
 ## [1.0.6] - Line chart
 
 - Created new model LineChartModelCallback when change pointer

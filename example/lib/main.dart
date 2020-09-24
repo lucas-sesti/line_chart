@@ -82,8 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
         LineChartModel(amount: 250, date: DateTime(2020, 1, 10)),
         LineChartModel(amount: 140, date: DateTime(2020, 1, 8)),
         LineChartModel(amount: 100, date: DateTime(2020, 1, 1)),
-        LineChartModel(amount: 110, date: DateTime(2020, 1, 9)),
         LineChartModel(amount: 390, date: DateTime(2020, 1, 11)),
+        LineChartModel(amount: 110, date: DateTime(2020, 1, 9)),
+        LineChartModel(amount: 410, date: DateTime(2020, 4, 9)),
       ];
     });
   }
@@ -113,33 +114,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 'Line chart - Line, Circles, Pointer',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              Container(
-                color: Colors.red,
-                child: LineChart(
-                  width: MediaQuery.of(context).size.width,
-                  height: 180,
-                  data: data,
-                  linePaint: linePaint,
-                  circlePaint: circlePaint,
-                  showPointer: true,
-                  showCircles: true,
-                  customDraw: (Canvas canvas, Size size) {},
-                  linePointerDecoration: BoxDecoration(
-                    color: Colors.black,
-                  ),
-                  pointerDecoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  insideCirclePaint: insideCirclePaint,
-                  onValuePointer: (LineChartModelCallback value) {
-                    print('${value.chart} ${value.percentage}');
-                  },
-                  onDropPointer: () {
-                    print('onDropPointer');
-                  },
-                  insidePadding: 16,
+              LineChart(
+                width: MediaQuery.of(context).size.width,
+                height: 180,
+                data: data,
+                linePaint: linePaint,
+                circlePaint: circlePaint,
+                showPointer: true,
+                showCircles: true,
+                customDraw: (Canvas canvas, Size size) {},
+                linePointerDecoration: BoxDecoration(
+                  color: Colors.black,
                 ),
+                pointerDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                ),
+                insideCirclePaint: insideCirclePaint,
+                onValuePointer: (LineChartModelCallback value) {
+                  print('${value.chart} ${value.percentage}');
+                },
+                onDropPointer: () {
+                  print('onDropPointer');
+                },
+                insidePadding: 16,
               ),
             ],
           ),
