@@ -1,6 +1,6 @@
 name: line_chart
 description: A simple flutter package to create a custom line chart
-version: 1.0.7
+version: 1.0.8
 repository: https://github.com/lucas-sesti/line_chart
 
 environment:

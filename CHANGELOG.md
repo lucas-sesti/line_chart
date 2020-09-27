@@ -1,3 +1,7 @@
+## [1.0.8] - Line chart
+
+- Fixed documentation
+
 ## [1.0.7] - Line chart
 
 - Removed containers in painter
