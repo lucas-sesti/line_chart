@@ -1,6 +1,10 @@
+## [1.0.9] - Line chart
+
+- Removed library name in painter file
+
 ## [1.0.8] - Line chart
 
-- Fixed documentation
+- Fixed documentation 
 
 ## [1.0.7] - Line chart
 

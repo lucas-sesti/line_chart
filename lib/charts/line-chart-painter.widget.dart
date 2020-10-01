@@ -1,5 +1,3 @@
-library line_chart;
-
 import 'package:flutter/material.dart';
 
 class LineChartPainter extends CustomPainter {
