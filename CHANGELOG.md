@@ -1,3 +1,10 @@
+## [1.1.11] - Line chart
+
+- Fixed changelog and pubspec
+
+## [1.1.10] - Line chart
+
+- Added null safety
 ## [1.0.9] - Line chart
 
 - Removed library name in painter file
