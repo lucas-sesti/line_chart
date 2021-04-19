@@ -6,10 +6,10 @@ import 'package:line_chart/model/line-chart.model.dart';
 
 class LineChart extends StatefulWidget {
   const LineChart({
-    @required this.width,
-    @required this.height,
-    @required this.data,
-    @required this.linePaint,
+    required this.width,
+    required this.height,
+    required this.data,
+    required this.linePaint,
     this.circlePaint,
     this.showPointer = false,
     this.onValuePointer,
@@ -23,19 +23,19 @@ class LineChart extends StatefulWidget {
     this.insidePadding = 8,
   });
 
-  final Function(LineChartModelCallback) onValuePointer;
-  final Function(Canvas, Size) customDraw;
-  final Function onDropPointer;
-  final BoxDecoration pointerDecoration;
-  final BoxDecoration linePointerDecoration;
+  final Function(LineChartModelCallback)? onValuePointer;
+  final Function(Canvas, Size)? customDraw;
+  final Function? onDropPointer;
+  final BoxDecoration? pointerDecoration;
+  final BoxDecoration? linePointerDecoration;
   final double width;
   final double height;
   final double circleRadiusValue;
   final bool showPointer;
   final bool showCircles;
   final Paint linePaint;
-  final Paint circlePaint;
-  final Paint insideCirclePaint;
+  final Paint? circlePaint;
+  final Paint? insideCirclePaint;
   final List<LineChartModel> data;
   final double insidePadding;
 
@@ -45,19 +45,19 @@ class LineChart extends StatefulWidget {
 
 class _LineChartState extends State<LineChart> {
   List<List> offsetsAndValues = [];
-  BoxDecoration linePointerDecoration = BoxDecoration(
+  BoxDecoration? linePointerDecoration = BoxDecoration(
     color: Colors.black,
   );
-  BoxDecoration pointerDecoration = BoxDecoration(
+  BoxDecoration? pointerDecoration = BoxDecoration(
     color: Colors.black,
     shape: BoxShape.circle,
   );
-  double x = 0;
-  double y = 0;
-  double maxValue = 0;
-  double minValue = 0;
+  double? x = 0;
+  double? y = 0;
+  double? maxValue = 0;
+  double? minValue = 0;
   bool showPointer = false;
-  Paint circlePaint = Paint()..color = Colors.black;
+  Paint? circlePaint = Paint()..color = Colors.black;
   List<double> percentagesOffsets = [];
 
   void initState() {
@@ -80,7 +80,7 @@ class _LineChartState extends State<LineChart> {
   }
 
   void didUpdateWidget(Widget oldWidget) {
-    super.didUpdateWidget(oldWidget);
+    super.didUpdateWidget(oldWidget as LineChart);
 
     setState(() {
       maxValue = _getMaxValue();
@@ -113,9 +113,9 @@ class _LineChartState extends State<LineChart> {
     }).toList();
   }
 
-  double _getMaxValue() {
+  double? _getMaxValue() {
     return widget.data.fold(0, (previousValue, element) {
-      if (element.amount > previousValue) {
+      if (element.amount! > previousValue!) {
         return element.amount;
       }
 
@@ -123,9 +123,9 @@ class _LineChartState extends State<LineChart> {
     });
   }
 
-  double _getMinValue() {
+  double? _getMinValue() {
     return widget.data.fold(maxValue, (previousValue, element) {
-      if (element.amount < previousValue) {
+      if (element.amount! < previousValue!) {
         return element.amount;
       }
 
@@ -133,12 +133,12 @@ class _LineChartState extends State<LineChart> {
     });
   }
 
-  Offset _getPointPos(double width, double amount) {
+  Offset _getPointPos(double width, double? amount) {
     if (maxValue == 0) {
       return Offset(width, widget.height);
     }
 
-    double percentage = (amount - minValue) / (maxValue - minValue);
+    double percentage = (amount! - minValue!) / (maxValue! - minValue!);
 
     if (percentage.isNaN) {
       percentage = 0.5;
@@ -152,10 +152,10 @@ class _LineChartState extends State<LineChart> {
     );
   }
 
-  int _binarySearchApprox(arr, double value) {
+  int? _binarySearchApprox(arr, double? value) {
     if (arr.length == 1) return 0;
 
-    var minIndex = 0;
+    int? minIndex = 0;
     var maxIndex = arr.length - 1;
     var isAscending = arr[maxIndex][0].dx > arr[minIndex][0].dx;
 
@@ -173,7 +173,7 @@ class _LineChartState extends State<LineChart> {
       }
     }
 
-    if ((value - arr[minIndex][0].dx).abs() <
+    if ((value! - arr[minIndex][0].dx).abs() <
         (value - arr[maxIndex][0].dx).abs()) {
       return minIndex;
     }
@@ -183,11 +183,11 @@ class _LineChartState extends State<LineChart> {
 
   void _showDetailsPointer(details) {
     if (widget.showPointer) {
-      final int nearestIndex =
+      final int? nearestIndex =
           _binarySearchApprox(offsetsAndValues, details.localPosition.dx);
 
       setState(() {
-        x = offsetsAndValues[nearestIndex][0].dx;
+        x = offsetsAndValues[nearestIndex!][0].dx;
         y = offsetsAndValues[nearestIndex][0].dy;
 
         if (details.localPosition.dx < 0) {
@@ -196,7 +196,7 @@ class _LineChartState extends State<LineChart> {
           showPointer = false;
         } else {
           if (widget.onValuePointer != null) {
-            widget.onValuePointer(
+            widget.onValuePointer!(
               LineChartModelCallback(
                 chart: offsetsAndValues[nearestIndex][1],
                 percentage: percentagesOffsets[nearestIndex] * 100,
@@ -215,7 +215,7 @@ class _LineChartState extends State<LineChart> {
       setState(() => showPointer = false);
 
       if (widget.onDropPointer != null) {
-        widget.onDropPointer();
+        widget.onDropPointer!();
       }
     }
   }
@@ -253,7 +253,7 @@ class _LineChartState extends State<LineChart> {
           if (widget.showPointer) ...{
             // Line
             Positioned(
-              left: x + widget.insidePadding - 1.5,
+              left: x! + widget.insidePadding - 1.5,
               top: 0,
               child: AnimatedOpacity(
                 duration: Duration(milliseconds: 200),
@@ -269,8 +269,8 @@ class _LineChartState extends State<LineChart> {
 
             // Circle
             Positioned(
-              left: x + widget.insidePadding - 6.5,
-              top: (y - 6) + widget.insidePadding / 2,
+              left: x! + widget.insidePadding - 6.5,
+              top: (y! - 6) + widget.insidePadding / 2,
               child: AnimatedOpacity(
                 duration: Duration(milliseconds: 200),
                 opacity: showPointer ? 1 : 0,

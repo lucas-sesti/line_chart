@@ -4,12 +4,12 @@ class LineChartPainter extends CustomPainter {
   final List<List> data;
   final double width;
   final double height;
-  final Function(Canvas, Size) customDraw;
+  final Function(Canvas, Size)? customDraw;
   final Paint linePaint;
-  final Paint circlePaint;
+  final Paint? circlePaint;
   final bool showCircles;
   final double radiusValue;
-  final Paint insideCirclePaint;
+  final Paint? insideCirclePaint;
   final double insidePadding;
 
   LineChartPainter(
@@ -22,13 +22,13 @@ class LineChartPainter extends CustomPainter {
     this.showCircles = true,
     this.radiusValue = 6,
     this.insideCirclePaint,
-    @required this.insidePadding,
+    required this.insidePadding,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     if (customDraw != null) {
-      customDraw(canvas, size);
+      customDraw!(canvas, size);
     }
 
     data.forEach((value) {
@@ -47,11 +47,11 @@ class LineChartPainter extends CustomPainter {
 
       if (showCircles) {
         canvas.drawCircle(Offset(value[0].dx + insidePadding, value[0].dy),
-            radiusValue, circlePaint);
+            radiusValue, circlePaint!);
         canvas.drawCircle(
           Offset(value[0].dx + insidePadding, value[0].dy),
           radiusValue - radiusValue / 2,
-          insideCirclePaint != null ? insideCirclePaint : circlePaint,
+          insideCirclePaint != null ? insideCirclePaint! : circlePaint!,
         );
       }
     });
